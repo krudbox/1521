@@ -16,23 +16,23 @@ main:
         li      $v0, 5
         syscall                         # scanf("%d", into $v0)
 
-        move    $t0, $v0
+        move    $t0, $v0	# int n
 
-        li      $t2, 1                  # fac = 1
+	li	$t1, 1		# int i
+	li	$t2, 1		# int fac
 
-main_fac_init:
-                                        # Loop initialisation
-        li      $t1, 1                  # i = 1
+while_cond:
+	bgt	$t1, $t0, while_end
 
-main_fac_cond:
-                                        # Loop condition
-        bgt     $t1, $t0, main_fac_end  # while (i <= n)  -->  if (i > n) break
-        mul     $t2, $t2, $t1           # fac = fac * i
+while_body:
+	mul	$t2, $t2, $t1
+while_incr:
+	addi	$t1, 1
+	b	while_cond
+while_end:
 
-main_fac_step:
-                                        # Loop step and back to the condition
-        addi    $t1, $t1, 1             # i++
-        j       main_fac_cond
+
+
 
 main_fac_end:
                                         # Prints the results

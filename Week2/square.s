@@ -1,26 +1,29 @@
 # Prints the square of a number
 
-main:                           # x,y in $t0, $t1
-        la      $a0, prompt_str     # printf("Enter a number: ");
-        li      $v0, 4
-        syscall
+	.text
 
-        li      $v0, 5          # scanf("%d", x);
-        syscall
-        move    $t0, $v0
+main:
+	li 	$v0, 4
+	la	$a0, prompt
+	syscall
 
-        mul     $t1, $t0, $t0   # y = x * x
+	li	$v0, 5
+	syscall
+	move	$t0, $v0
 
-        move    $a0, $t1                # printf("%d", y);
-        li      $v0, 1
-        syscall
+	mul	$t1, $t0, $t0
+	move	$a0, $t1
 
-        li      $a0, '\n'       # printf("%c", '\n');
-        li      $v0, 11
-        syscall
+	li	$v0, 1
+	syscall
 
-        jr      $ra             # return from main
+	li	$a0, '\n'
+	li	$v0, 11
+	syscall
 
-        .data
-prompt_str:
-        .asciiz "Enter a number: "
+	li	$v0, 0
+	jr	$ra
+
+	.data
+prompt:
+	.asciiz "Enter a number: "

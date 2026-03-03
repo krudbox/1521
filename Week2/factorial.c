@@ -7,9 +7,11 @@ int main(void) {
   printf("n  = ");
   scanf("%d", &n);
 
+  int i = 1;
   int fac = 1;
-  for (int i = 1; i <= n; i++) {
+  while (i <= n) {
     fac *= i;
+    i++;
   }
 
   printf("n! = %d\n", fac);

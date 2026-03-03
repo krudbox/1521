@@ -17,24 +17,23 @@ main:
         syscall
         move    $t0, $v0
 
-        ble     $t0, SQUARE_MAX, x_le_square_max        # if (x <= SQUARE_MAX) goto square;
+	ble	$t0, SQUARE_MAX, if_xle
 
-        la      $a0, too_big_str            # printf("square too big for 32 bits\n");
-        li      $v0, 4
-        syscall
+if_xgt:
+	la	$a0, too_big_str
+	li	$v0, 4
+	syscall
 
-        j       epilogue                # goto epilogue;
+	j 	epilogue
 
-x_le_square_max:
-        mul     $t1, $t0, $t0           # y = x * x
 
-        move    $a0, $t1                # printf("%d", y);
-        li      $v0, 1
-        syscall
+if_xle:
+	mul	$a0, $t0, $t0
+	li	$v0, 1
+	syscall
 
-        li      $a0, '\n'               # printf("%c", '\n');
-        li      $v0, 11
-        syscall
+
+
 epilogue:
         jr      $ra                     # return from main
 
